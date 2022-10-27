@@ -210,8 +210,8 @@ def FreewheelDmaCodes ():
  'New York, NY': 2,
  'Portland-Auburn, ME': 1}
     return dma_dict
-  
- def FreewheelStateCodes():
+
+def FreewheelStateCodes():
     state_dict = {'Alabama': 2256,
  'Alaska': 2257,
  'Arizona': 2258,
@@ -260,7 +260,6 @@ def FreewheelDmaCodes ():
  'Vermont': 2304,
  'Virginia': 2305,
  'Washington': 2306,
-
  'West Virginia': 2307,
  'Wisconsin': 2308,
  'Wyoming': 2309}
