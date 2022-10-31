@@ -1,7 +1,7 @@
 import setuptools
 setuptools.setup(
  name='freewheel4py',
- version='0.4',
+ version='0.6',
  author="dylanmarsella",
  author_email="dylanmarsella1@gmail.com",
  description="helps the bois create placements and creatives on freewheel",
