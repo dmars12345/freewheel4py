@@ -125,7 +125,7 @@ class placementObj():
     
     def getForecast(self,fw):
         try:
-            forecastGet = rs.get(self.placements[2].forecastUrl,headers = fw.json).json()
+            forecastGet = rs.get(self.forecastUrl,headers = fw.json).json()
         except AttributeError:
             placementMissingJobIdError(Exception)
             
