@@ -132,7 +132,7 @@ class placementObj():
         try:
             forecastGet['net_available']
         except KeyError:
-            if self.data['placement']['id'] in forecastGet['errors'][0]['message'] and Please try again later. in ['errors'][0]['message']:
+            if self.data['placement']['id'] in forecastGet['errors'][0]['message'] and 'Please try again later.' in ['errors'][0]['message']:
                 raise placementForecastResultsNotReadyError('''forecast is not ready yet, try later when it has loaded.''')
                 
         self.forecastResults = forecastGet
