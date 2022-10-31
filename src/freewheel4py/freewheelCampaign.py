@@ -1,3 +1,10 @@
+import requests as rs
+import json
+from json import JSONDecodeError
+import xmltodict
+from dict2xml import dict2xml
+
+
 class fw():
     def __init__(self,username,password):
         try:
@@ -116,7 +123,7 @@ class placementObj():
             
         self.forecastUrl = f"https://api.freewheel.tv/services/v4/placements/{forecastPost['placement_id']}/forecasts?forecast_id={forecastPost['job_id']}"
     
-    def getForecast(self,fw)
+    def getForecast(self,fw):
         try:
             forecastGet = rs.get(self.placements[2].forecastUrl,headers = fw.json).json()
         except AttributeError:
@@ -150,3 +157,6 @@ class placementMissingJobIdError(Exception):
     
 class placementForecastResultsNotReadyError(Exception):
      pass
+
+class placementForecastHasNotLoadedError(Exception):
+    pass
