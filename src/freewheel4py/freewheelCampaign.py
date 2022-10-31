@@ -124,18 +124,19 @@ class placementObj():
         self.forecastUrl = f"https://api.freewheel.tv/services/v4/placements/{forecastPost['placement_id']}/forecasts?forecast_id={forecastPost['job_id']}"
     
     def getForecast(self,fw):
-        try:
-            forecastGet = rs.get(self.forecastUrl,headers = fw.json).json()
-        except AttributeError:
-            placementMissingJobIdError(Exception)
+
+        forecastGet = rs.get(self.forecastUrl,headers = fw.json).json()
+
             
         try:
-            forecastGet['net_available']
+            Print = forecastGet['placement_id']
         except KeyError:
             if self.data['placement']['id'] in forecastGet['errors'][0]['message'] and 'Please try again later.' in ['errors'][0]['message']:
                 raise placementForecastResultsNotReadyError('''forecast is not ready yet, try later when it has loaded.''')
                 
         self.forecastResults = forecastGet
+        
+        return self
         
 
 
