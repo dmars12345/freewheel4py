@@ -36,13 +36,10 @@ class placementObj():
         
     def Get(self,fw):
         node = 'all'
-        try:
-            get_url = f"https://api.freewheel.tv/services/v3/placements/{self.data['placement']['id']}?show={node}"
-        except KeyError:
-            raise placementMissingIdError('''placement is missing ID from its data''')
+        get_url = f"https://api.freewheel.tv/services/v3/placements/{self.data['placement']['id']}?show={node}"
         get_placement = rs.get(get_url,headers=fw.xml).text
         self.data = xmltodict.parse(get_placement,dict_constructor=dict)
-        
+    
         return self
     
     def getPacing(self,fw):
