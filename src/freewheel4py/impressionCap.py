@@ -3,23 +3,23 @@ from dict2xml import dict2xml
 import requests as rs
 class fw():
     def __init__(self,username,password):
-        try:
-            filetype = 'xml'
-            headers = {'accept': 'application/json','content-type': 'application/x-www-form-urlencoded',}
-            data = { 'grant_type': 'password','username': username,'password': password,}
-            response = rs.post('https://api.freewheel.tv/auth/token', headers=headers, data=data).json()
-            response['access_token']
-            token = 'Bearer ' + response['access_token']
-            headers = {'accept': 'application/'+str(filetype), 'authorization' : token, 'Content-Type': 'application/'+str(filetype),} 
-            self.xml = headers
-            filetype = 'json'
-            headers = {'accept': 'application/json','content-type': 'application/x-www-form-urlencoded',}
-            data = { 'grant_type': 'password','username': username,'password': password,}
-            response = rs.post('https://api.freewheel.tv/auth/token', headers=headers, data=data).json()
-            response['access_token']
-            token = 'Bearer ' + response['access_token']
-            headers = {'accept': 'application/'+str(filetype), 'authorization' : token, 'Content-Type': 'application/'+str(filetype),} 
-            self.json = headers
+
+        filetype = 'xml'
+        headers = {'accept': 'application/json','content-type': 'application/x-www-form-urlencoded',}
+        data = { 'grant_type': 'password','username': username,'password': password,}
+        response = rs.post('https://api.freewheel.tv/auth/token', headers=headers, data=data).json()
+        response['access_token']
+        token = 'Bearer ' + response['access_token']
+        headers = {'accept': 'application/'+str(filetype), 'authorization' : token, 'Content-Type': 'application/'+str(filetype),} 
+        self.xml = headers
+        filetype = 'json'
+        headers = {'accept': 'application/json','content-type': 'application/x-www-form-urlencoded',}
+        data = { 'grant_type': 'password','username': username,'password': password,}
+        response = rs.post('https://api.freewheel.tv/auth/token', headers=headers, data=data).json()
+        response['access_token']
+        token = 'Bearer ' + response['access_token']
+        headers = {'accept': 'application/'+str(filetype), 'authorization' : token, 'Content-Type': 'application/'+str(filetype),} 
+        self.json = headers
 
 
             
