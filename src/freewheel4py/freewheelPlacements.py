@@ -1,7 +1,3 @@
-
-
-
-
 import requests as rs
 import json
 from json import JSONDecodeError
@@ -49,14 +45,13 @@ class placementObj():
 
         self.data = {'placement' : dictObj}
         self.id = self.data['placement']['id']
+
+
         
         
     def Get(self,fw):
         node = 'all'
-        try:
-            get_url = f"https://api.freewheel.tv/services/v3/placements/{self.data['placement']['id']}?show={node}"
-        except KeyError:
-            raise placementMissingIdError('''placement is missing ID from its data''')
+        get_url = f"https://api.freewheel.tv/services/v3/placements/{self.data['placement']['id']}?show={node}"
         get_placement = rs.get(get_url,headers=fw.xml).text
         self.data = xmltodict.parse(get_placement,dict_constructor=dict)
         
@@ -68,13 +63,13 @@ class placementObj():
 
     def getInsertionOrder(self,fw):
 
-        get= XML(rs.get(f"https://api.freewheel.tv/services/v3/insertion_orders/{self.data['placement']['insertion_order_id']}",headers = fw.xml))
+        get= xmltodict.parse(rs.get(f"https://api.freewheel.tv/services/v3/insertion_orders/{self.data['placement']['insertion_order_id']}",headers = fw.xml).text,dict_constructor=dict)
 
         self.insertionOrderId= get['insertion_order']['id']
         self.campaignId = get['insertion_order']['campaign_id']
 
     def getAdvertiserAgency(self,fw):
-        get = XML(rs.get(f"https://api.freewheel.tv/services/v3/campaign/{self.campaignId}",headers = fw.xml))
+        get = xmltodict.parse(rs.get(f"https://api.freewheel.tv/services/v3/campaign/{self.campaignId}",headers = fw.xml).text,dict_constructor=dict)
         self.advertiserId = get['campaign']['advertiser_id']
         self.agencyId = get['campaign']['agency_id']
 
@@ -182,9 +177,9 @@ def getCampaignAdvertiser(self,fw):
 
 def getCampaignInsertionOrders(self,fw):
     ioList = []
-    queryGet = XML(rs.get(f'https://api.freewheel.tv/services/v3/campaign/{self.id}/insertion_orders?per_page=50&page=1',headers = FW.xml))    
+    queryGet = XML(rs.get(f'https://api.freewheel.tv/services/v3/campaign/{self.id}/insertion_orders?per_page=50&page=1',headers = fw.xml))    
     for i in range(int(queryGet['insertion_orders']['@total_pages'])):
-        loopGet = XML(rs.get(f'https://api.freewheel.tv/services/v3/campaign/{self.id}/insertion_orders?per_page=50&page={i+1}',headers = FW.xml)) 
+        loopGet = XML(rs.get(f'https://api.freewheel.tv/services/v3/campaign/{self.id}/insertion_orders?per_page=50&page={i+1}',headers = fw.xml)) 
         if type(loopGet['insertion_orders']['insertion_order']) == list :
             for item in loopGet['insertion_orders']['insertion_order']:
                 if item['status'] == 'ACTIVE':
