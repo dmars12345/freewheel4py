@@ -8,6 +8,13 @@ from json import JSONDecodeError
 import xmltodict
 from dict2xml import dict2xml
 
+def XML (req):
+    if type(req) == dict:
+        item = dict2xml(req)
+    else:
+        item = xmltodict.parse(req.text,dict_constructor=dict)
+    return item
+
 
 class fw():
     def __init__(self,username,password):
